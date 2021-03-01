@@ -8,10 +8,13 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "compile": "webpack --mode development"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.8",
+    "babel-loader": "^8.2.2",
+    "html-webpack-plugin": "^5.2.0"
   }
 }
