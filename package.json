@@ -8,7 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "compile": "webpack --mode development"
+    "compile": "webpack --mode development",
+    "start": "nodemon ./server/index.js",
+    "seed": "node ./server/seed.js"
   },
   "dependencies": {
     "axios": "^0.21.1",

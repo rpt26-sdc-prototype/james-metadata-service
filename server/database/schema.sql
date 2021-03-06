@@ -35,7 +35,7 @@ CREATE TABLE `games` (
   `description` LONGBLOB NULL,
   `shortDescription` BLOB NULL,
   `developer` VARCHAR(100) NULL DEFAULT 'NULL',
-  `publisher` INTEGER NULL DEFAULT NULL,
+  `publisher` VARCHAR(100) NULL DEFAULT NULL,
   `releaseDate` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `genres`;
 
 CREATE TABLE `genres` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `name` INTEGER NULL DEFAULT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -72,7 +72,7 @@ ALTER TABLE `item_genre_joinTable` ADD FOREIGN KEY (id_genres) REFERENCES `genre
 -- Test Data
 -- ---
 
--- INSERT INTO `item_genre_joinTable` (`id`,`id_steam-items`,`id_genres`) VALUES
+-- INSERT INTO `item_genre_joinTable` (`id`,`id_games`,`id_genres`) VALUES
 -- ('','','');
 -- INSERT INTO `games` (`id`,`name`,`price`,`description`,`shortDescription`,`developer`,`publisher`,`releaseDate`) VALUES
 -- ('','','','','','','','');

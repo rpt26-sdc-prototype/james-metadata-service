@@ -4,4 +4,4 @@ class Genre {
   }
 }
 
-export default Genre;
+module.exports = Genre;

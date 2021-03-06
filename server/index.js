@@ -1,24 +1,23 @@
 //library
 const express = require('express');
+const path = require('path');
+const Promise = require('bluebird');
+
+//Server Init
 const app = express();
 const port = 4032;
 const route = require('./routes.js');
-const path = require('path');
-const db = require('./database/index.js');
+const db = require('./database/dbManager.js');
+
+//Custom Classes
+const SteamProduct = require('./classes/steamProduct.js');
+const Genre = require('./classes/genre.js');
 
 //middleware import and activation
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/api/seed', (req, res) => {
 
-
-app.post('/api/seed', (req, res) => {
-  if(req.body.areYouSure === true) {
-    db.seed().then((results) => {
-      req.status(201).send(results);
-    }).catch(e => {
-      req.status(500).send(e);
-    })
-  }
 });
