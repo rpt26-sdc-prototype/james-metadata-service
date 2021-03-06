@@ -52,7 +52,7 @@ dbManager.initializeDatabase().then(() => {
     developer: 'Forgotton Empires',
     publisher: 'Xbox Game Studios',
     releaseDate: new Date('14 Nov 2019').getTime(),
-    genres: [new Genre('Strategy')]
+    genres: [genres[0]]
   }));
   //generate 99 fake games
   for (var i = 0; i < 99; i++) {
@@ -77,16 +77,20 @@ dbManager.initializeDatabase().then(() => {
       genresInserted.push(dbManager.insertGenre(genre));
     })
 
-    Promise.all(genresInserted).then(() => {
-      console.log('Adding Products to database....')
-      var productsInserted = []
-      products.forEach(product => {
-        productsInserted.push(dbManager.insertGame(product));
-      });
+    return Promise.all(genresInserted);
 
-      Promise.all(productsInserted).then(() => {
-        console.log('Database Seeded! Press Ctrl + C to end session.');
-      });
-    })
-  });
-})
+
+  }).then(() => {
+    console.log('Adding Products to database....')
+    var productsInserted = []
+    products.forEach(product => {
+      productsInserted.push(dbManager.insertGame(product));
+    });
+
+    return Promise.all(productsInserted);
+
+
+  }).then(() => {
+    console.log('Database Seeded! Press Ctrl + C to end session.');
+  })
+});
