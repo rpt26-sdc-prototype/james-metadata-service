@@ -41,7 +41,7 @@ class SteamProduct {
     options.developer !== undefined ? this.developer = options.developer : this.setRandDeveloper();
     options.publisher !== undefined ? this.publisher = options.publisher : this.setRandPublisher();
     options.releaseDate !== undefined ? this.releaseDate = options.releaseDate : this.setRandReleaseDate();
-    options.genres !== undefined ? this.genres = options.genres : this.setRandGenres();
+    options.genres !== undefined ? this.genres = options.genres : this.genres = [];
   }
 
   setRandName() {
@@ -67,12 +67,16 @@ class SteamProduct {
     var paragraphs = Math.floor(Math.random * 6) + 3;
     this.description = axios.get(`https://www.loripsum.net/api/${paragraphs}/long/headers`).then((results)=> {
       this.description = results.data;
+    }).catch(() => {
+      this.description = 'Description not Found...';
     })
   }
 
   setRandShortDescription() {
     this.shortDescription = axios.get('https://www.loripsum.net/api/1/medium/plaintext').then((results) => {
       this.shortDescription = results.data;
+    }).catch(() => {
+      this.shortDescription = 'Description not found...';
     })
   }
 
@@ -87,10 +91,6 @@ class SteamProduct {
 
   setRandReleaseDate() {
     this.releaseDate = Math.floor(Math.random() * new Date('December 31, 2019 11:59:59').getTime() );
-  }
-
-  setRandGenres() {
-    this.genres = ['Strategy'];
   }
 }
 

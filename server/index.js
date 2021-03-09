@@ -7,7 +7,7 @@ const Promise = require('bluebird');
 const app = express();
 const port = 4032;
 const route = require('./routes.js');
-const db = require('./database/dbManager.js');
+const dbManager = require('./database/dbManager.js');
 
 //Custom Classes
 const SteamProduct = require('./classes/steamProduct.js');
@@ -18,6 +18,15 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/api/seed', (req, res) => {
+app.get('/api/product/*', (req, res, next) => {
+  productID = req.originalUrl.slice('/api/product/'.length);
 
+  dbManager.getGame(productID).then((product) => {
+    res.status(200).send(product);
+  })
+
+});
+
+app.listen(port, ()=> {
+  console.log(`Server started on Port ${port}`);
 });

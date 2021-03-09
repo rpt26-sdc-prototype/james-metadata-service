@@ -53,6 +53,45 @@ class DataManager {
 
       })
   }
+
+  getGame(id) {
+    return db.queryAsync(`Select * from games where id = ${id}`)
+    .then((data) => {
+      let dateObj = new Date(data[0].releaseDate);
+      let numMon = dateObj.getMonth();
+      let dateStr = '';
+
+      numMon === 0 ? dateStr += 'Jan' :
+      numMon === 1 ? dateStr += 'Feb' :
+      numMon === 2 ? dateStr += 'Mar' :
+      numMon === 3 ? dateStr += 'Apr' :
+      numMon === 4 ? dateStr += 'May' :
+      numMon === 5 ? dateStr += 'Jun' :
+      numMon === 6 ? dateStr += 'Jul' :
+      numMon === 7 ? dateStr += 'Aug' :
+      numMon === 8 ? dateStr += 'Sep' :
+      numMon === 9 ? dateStr += 'Oct' :
+      numMon === 10 ? dateStr += 'Nov' :
+      numMon === 11 ? dateStr += 'Dec' : dateStr += 'Month';
+
+      dateStr += ' ' + dateObj.getDate() + ', ' + dateObj.getFullYear();
+
+      data[0].releaseDate = dateStr;
+
+
+      data[0].description = data[0].description.toString('utf-8');
+      data[0].shortDescription = data[0].shortDescription.toString('utf-8');
+      data[0].genres = [];
+
+      return db.queryAsync(`SELECT genres.name FROM genres INNER JOIN item_genre_joinTable WHERE item_genre_joinTable.id_games = ${id} AND item_genre_joinTable.id_genres = genres.id`)
+      .then((genres) => {
+        genres.forEach((genre) => {
+          data[0].genres.push(genre.name);
+        })
+        return data[0];
+      })
+    })
+  }
 }
 
 module.exports = new DataManager();

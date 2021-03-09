@@ -71,7 +71,6 @@ dbManager.initializeDatabase().then(() => {
   })
 
   Promise.all(productsGenerated).then(() => {
-    console.log('Adding Genres to database...');
     var genresInserted = [];
     genres.forEach(genre => {
       genresInserted.push(dbManager.insertGenre(genre));
@@ -79,18 +78,18 @@ dbManager.initializeDatabase().then(() => {
 
     return Promise.all(genresInserted);
 
-
   }).then(() => {
     console.log('Adding Products to database....')
     var productsInserted = []
     products.forEach(product => {
+      console.log(product.genres);
       productsInserted.push(dbManager.insertGame(product));
     });
 
     return Promise.all(productsInserted);
 
-
   }).then(() => {
-    console.log('Database Seeded! Press Ctrl + C to end session.');
+    console.log('Database Seeded!');
+    process.exit(0);
   })
 });
