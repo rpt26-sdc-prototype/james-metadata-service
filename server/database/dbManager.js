@@ -43,12 +43,14 @@ class DataManager {
       VALUES ('${product.name}', ${product.price * 100}, '${product.description}', '${product.shortDescription}', '${product.developer}', '${product.publisher}', ${product.releaseDate})`)
       .then((returnData) => {
 
-        Promise.all(genrePromises).then((genreIds) => {
-          var genreIDPromises = [];
+        return Promise.all(genrePromises).then((genreIds) => {
+          var relationshipPromises = [];
           genreIds.forEach((id) => {
-            genreIDPromises.push(db.queryAsync(`INSERT INTO item_genre_joinTable (id_games, id_genres) VALUES (${returnData.insertId}, ${id})`));
+            relationshipPromises.push(db.queryAsync(`INSERT INTO item_genre_joinTable (id_games, id_genres) VALUES (${returnData.insertId}, ${id})`).catch((err)=> {
+              console.error(err);
+            }));
           });
-          return Promise.all(genreIDPromises);
+          return Promise.all(relationshipPromises);
         });
 
       })

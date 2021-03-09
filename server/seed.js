@@ -82,7 +82,6 @@ dbManager.initializeDatabase().then(() => {
     console.log('Adding Products to database....')
     var productsInserted = []
     products.forEach(product => {
-      console.log(product.genres);
       productsInserted.push(dbManager.insertGame(product));
     });
 
