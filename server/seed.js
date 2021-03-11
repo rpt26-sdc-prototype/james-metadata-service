@@ -12,6 +12,7 @@ console.log('preparing to seed database...');
 
 dbManager.initializeDatabase().then(() => {
   //Generate Genres
+  console.log('Generating Genres...');
   genres.push(new Genre('Strategy'));
   genres.push(new Genre('Real Time Strategy'));
   genres.push(new Genre('Turn Based Strategy'));
@@ -36,7 +37,7 @@ dbManager.initializeDatabase().then(() => {
   genres.push(new Genre('Party'));
 
   //Generate guaranteed product
-  console.log('generating products...');
+  console.log('Generating Products...');
 
   products.push(new SteamProduct({
     name: "Age of Empires II: Definitive Edition",
@@ -71,6 +72,7 @@ dbManager.initializeDatabase().then(() => {
   })
 
   Promise.all(productsGenerated).then(() => {
+    console.log('Adding Genres to database...');
     var genresInserted = [];
     genres.forEach(genre => {
       genresInserted.push(dbManager.insertGenre(genre));
