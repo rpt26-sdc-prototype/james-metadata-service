@@ -18,6 +18,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+//api endpoints
 app.get('/api/product/*', (req, res, next) => {
   productID = req.originalUrl.slice('/api/product/'.length);
 
@@ -26,8 +28,18 @@ app.get('/api/product/*', (req, res, next) => {
   }).catch((error) => {
     res.status(500).send(error);
   })
-
 });
+
+
+
+//serve static files
+app.get('*/index.js', (req, res) => {
+  res.sendFile(path.join(__dirname,'..','public','index.js'));
+})
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname,'..','public','index.html'));
+})
 
 app.listen(port, ()=> {
   console.log(`Server started on Port ${port}`);
