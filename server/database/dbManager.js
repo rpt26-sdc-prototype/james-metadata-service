@@ -94,6 +94,10 @@ class DataManager {
       })
     })
   }
+
+  closeConnection() {
+    db.closeConnection();
+  }
 }
 
 module.exports = new DataManager();
