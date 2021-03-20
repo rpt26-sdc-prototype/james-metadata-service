@@ -27,7 +27,12 @@ class App extends React.Component {
 
   getProduct() {
     var p = window.location.pathname;
-    var url = '/api/product/' + p.slice(1, -1);
+    if (p[p.length - 1] === '/') {
+      var url = '/api/product/' + p.slice(1, -1);
+    } else {
+      var url = '/api/product/' + p.slice(1);
+    }
+
     axios.get(url).then((response) => {
       this.setState({
         product: response.data
