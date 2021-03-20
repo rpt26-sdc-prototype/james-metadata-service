@@ -50,7 +50,8 @@ class App extends React.Component {
         <div className='mainbar' style={
           {
             display: 'inline-block',
-            marginRight: '10px'
+            marginRight: '10px',
+            textAlign: 'left'
           }
         }>
           <BuyWidget product={this.state.product}/>
@@ -59,7 +60,8 @@ class App extends React.Component {
         <div className='sidebar' style={
           {
             display: 'inline-block',
-            verticalAlign: 'top'
+            verticalAlign: 'top',
+            textAlign: 'left'
           }
         }>
           <SidebarMetadata product={this.state.product}/>
