@@ -25,7 +25,7 @@ app.get('/api/product/*', (req, res, next) => {
   dbManager.getGame(productID).then((product) => {
     res.status(200).send(product);
   }).catch((error) => {
-    res.status(500).send(error);
+    res.status(404).send(error);
   })
 });
 
