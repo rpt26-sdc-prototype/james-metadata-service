@@ -6,7 +6,6 @@ const Promise = require('bluebird');
 //Server Init
 const app = express();
 const port = 4032;
-const route = require('./routes.js');
 const dbManager = require('./database/dbManager.js');
 
 //Custom Classes

@@ -1,6 +1,6 @@
 # Pathfinder FEC's metadata service
 
-> Holds product metadata and renders several elements to the screen
+> Holds product metadata and renders several react components
 
 
 ## Table of Contents
@@ -19,7 +19,6 @@
 - Mysql 5.7
 - etc
 
-## Development
 
 ## Seeding the Database
 
@@ -33,6 +32,14 @@ Then, from the root directory:
 npm run seed
 ```
 
+## Initializing the service
+
+Once the database is seeded, do the following from the main directory
+
+```sh
+npm run compile //creates public directory with webpack
+npm start //starts the service
+```
 
 ### Installing Dependencies
 
