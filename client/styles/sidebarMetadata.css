@@ -1,0 +1,41 @@
+#metadataApp .sidebarElement {
+  background: linear-gradient(to right, #16202d, #0e141c);
+  width: 300px;
+  padding: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: acb2b8;
+  font-size: 12px;
+  line-height: 20px;
+}
+#metadataApp .linkbar {
+  min-height: 17px;
+  padding-top: 4px;
+  padding-left: 8px;
+  padding-bottom: 4px;
+  line-height: 17px;
+  background: rgba( 103, 193, 245, 0.1 );
+  color: #67c1f5;
+  border-radius: 1px;
+  display: block;
+  margin-bottom: 2px;
+}
+#metadataApp .linkbar:hover {
+  background: #54a5d4;
+  text-shadow: 1px 1px 2px #000000aa;
+  color: #fff;
+}
+#metadataApp .metadataLabel {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #556772;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+#metadataApp .metadataLink {
+  font-weight: 300;
+  color: #67c1f5;
+  text-decoration: none;
+}
+#metadataApp .metadataLink:hover {
+  color: white;
+}
