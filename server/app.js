@@ -37,6 +37,10 @@ app.get('*/index.js', (req, res) => {
   res.sendFile(path.join(__dirname,'..','public','index.js'));
 })
 
+app.get('*/images/maincol_gradient_rule.png', (req, res) => {
+  res.sendFile(path.join(__dirname,'..','public','images','maincol_gradient_rule.png'));
+})
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname,'..','public','index.html'));
 })
