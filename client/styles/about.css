@@ -1,0 +1,47 @@
+#metadataApp .aboutContainer {
+  background-color: #1b2838;
+  color: acb2b8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+}
+#metadataApp .aboutContainer a {
+  color:#ffffff;
+  font-weight: bold;
+}
+#metadataApp .aboutContainer a:visited {
+  color:#ffffff;
+  font-weight: bold;
+}
+#metadataApp .aboutContainer a:hover {
+  color: #67c1f5;
+  text-shadow: 1px 1px 2px #000000aa;
+}
+
+#metadataApp .aboutContainer h1, #metadataApp .aboutContainer h2, #metadataApp .aboutContainer h3, #metadataApp .aboutContainer h4, #metadataApp .aboutContainer h5, #metadataApp .aboutContainer h6 {
+    font-family: "Motiva Sans", Sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 5px;
+    letter-spacing: 2px;
+    font-weight: normal;
+    padding-top: 2px;
+    display: block;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+
+    line-height: 26px;
+
+    font-weight: bold;
+
+    color: #FFFFFF;
+
+    background-image: url(https://store.steampowered.com/public/images/v6/maincol_gradient_rule.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;
+
+    margin-bottom: 1px;
+}

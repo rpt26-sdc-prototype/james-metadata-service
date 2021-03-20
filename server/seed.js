@@ -42,13 +42,13 @@ dbManager.initializeDatabase().then(() => {
   products.push(new SteamProduct({
     name: "Age of Empires II: Definitive Edition",
     price: 19.99,
-    description: `Age of Empires II: Definitive Edition celebrates the 20th anniversary of one of the most popular strategy games ever with stunning 4K Ultra HD graphics, a new and fully remastered soundtrack, and brand-new content, “The Last Khans” with 3 new campaigns and 4 new civilizations.
+    description: `<p>Age of Empires II: Definitive Edition celebrates the 20th anniversary of one of the most popular strategy games ever with stunning 4K Ultra HD graphics, a new and fully remastered soundtrack, and brand-new content, “The Last Khans” with 3 new campaigns and 4 new civilizations.</p>
 
-    Explore all the original campaigns like never before as well as the best-selling expansions, spanning over 200 hours of gameplay and 1,000 years of human history. Head online to challenge other players with 35 different civilizations in your quest for world domination throughout the ages.
+    <p>Explore all the original campaigns like never before as well as the best-selling expansions, spanning over 200 hours of gameplay and 1,000 years of human history. Head online to challenge other players with 35 different civilizations in your quest for world domination throughout the ages.</p>
 
-    Choose your path to greatness with this definitive remaster to one of the most beloved strategy games of all time.
+    <p>Choose your path to greatness with this definitive remaster to one of the most beloved strategy games of all time.</p>
 
-    https://privacy.microsoft.com/privacystatement`,
+    <a href="https://privacy.microsoft.com/privacystatement">https://privacy.microsoft.com/privacystatement</a>`,
     shortDescription: `Age of Empires II: Definitive Edition celebrates the 20th anniversary of one of the most popular strategy games ever with stunning 4K Ultra HD graphics, a new and fully remastered soundtrack, and brand-new content, “The Last Khans” with 3 new campaigns and 4 new civilizations.`,
     developer: 'Forgotton Empires',
     publisher: 'Xbox Game Studios',

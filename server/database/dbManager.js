@@ -59,6 +59,7 @@ class DataManager {
   getGame(id) {
     return db.queryAsync(`Select * from games where id = ${id}`)
     .then((data) => {
+      //Translate Date
       let dateObj = new Date(data[0].releaseDate);
       let numMon = dateObj.getMonth();
       let dateStr = '';
@@ -80,10 +81,20 @@ class DataManager {
 
       data[0].releaseDate = dateStr;
 
+      //Translate Price
+      if (data[0].price !== 0) {
+        data[0].price = data[0].price + '';
+
+        data[0].price.length === 2 ? data[0].price = '$0.' + data[0].price : data[0].price = '$' + data[0].price.slice(0, -2) + '.' + data[0].price.slice(-2);
+
+      } else {
+        data[0].price = 'Free to Play';
+      }
 
       data[0].description = data[0].description.toString('utf-8');
       data[0].shortDescription = data[0].shortDescription.toString('utf-8');
       data[0].genres = [];
+
 
       return db.queryAsync(`SELECT genres.name FROM genres INNER JOIN item_genre_joinTable WHERE item_genre_joinTable.id_games = ${id} AND item_genre_joinTable.id_genres = genres.id`)
       .then((genres) => {

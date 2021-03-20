@@ -1,0 +1,10 @@
+#metadataApp {
+  background-color: #1b2838;
+}
+#metadataApp .mainbar {
+  width: 600px;
+  text-align: left;
+}
+#metadataApp .sidebar {
+  width: 300px;
+}

@@ -28,9 +28,7 @@ class App extends React.Component {
   getProduct() {
     var p = window.location.pathname;
     var url = '/api/product/' + p.slice(1, -1);
-    console.log(url);
     axios.get(url).then((response) => {
-      console.log(response.data)
       this.setState({
         product: response.data
       })
@@ -44,9 +42,23 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <About product={this.state.product}/> <br /><br />
-        <BuyWidget product={this.state.product}/> <br /><br />
-        <SidebarMetadata product={this.state.product}/>
+        <div className='mainbar' style={
+          {
+            display: 'inline-block',
+            marginRight: '10px'
+          }
+        }>
+          <BuyWidget product={this.state.product}/>
+          <About product={this.state.product}/>
+        </div>
+        <div className='sidebar' style={
+          {
+            display: 'inline-block',
+            verticalAlign: 'top'
+          }
+        }>
+          <SidebarMetadata product={this.state.product}/>
+        </div>
       </div>
     )
   }
