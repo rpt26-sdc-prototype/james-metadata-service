@@ -34,6 +34,8 @@ const randTables = {
 
 class SteamProduct {
   constructor(options = {}) {
+    this.generated = []; //contains promises, when all are resolved, the generation of this object is complete
+
     options.name !== undefined ? this.name = options.name : this.setRandName();
     options.price !== undefined ? this.price = options.price : this.setRandPrice();
     options.description !== undefined ? this.description = options.description : this.setRandDescription();
@@ -70,6 +72,7 @@ class SteamProduct {
     }).catch(() => {
       this.description = 'Description not Found...';
     })
+    this.generated.push(this.description);
   }
 
   setRandShortDescription() {
@@ -78,6 +81,7 @@ class SteamProduct {
     }).catch(() => {
       this.shortDescription = 'Description not found...';
     })
+    this.generated.push(this.shortDescription);
   }
 
   setRandDeveloper() {

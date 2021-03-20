@@ -8,11 +8,11 @@ let connection = mysql.createConnection({
 });
 
 connection.connect((err) => {
-  if (err) {
-    console.log('Error connecting to the database: ' + err.message);
-  }
-  console.log('Connected to MySQL database server.');
+    if (err) {
+      console.log('Error connecting to the database: ' + err.message);
+    }
 });
+
 
 
 module.exports = connection;
