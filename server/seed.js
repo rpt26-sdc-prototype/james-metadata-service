@@ -66,8 +66,9 @@ dbManager.initializeDatabase().then(() => {
   }
 
   var productsGenerated = [];
+
   products.forEach(product => {
-    productsGenerated.push(product.generated);
+    productsGenerated.push(Promise.all(product.generated));
   })
 
   Promise.all(productsGenerated).then(() => {
@@ -80,7 +81,7 @@ dbManager.initializeDatabase().then(() => {
     return Promise.all(genresInserted);
 
   }).then(() => {
-    console.log('Adding Products to database....')
+    console.log('Adding Products to database....');
     var productsInserted = []
     products.forEach(product => {
       productsInserted.push(dbManager.insertGame(product));
