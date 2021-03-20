@@ -67,8 +67,7 @@ dbManager.initializeDatabase().then(() => {
 
   var productsGenerated = [];
   products.forEach(product => {
-    productsGenerated.push(product.description);
-    productsGenerated.push(product.shortDescription);
+    productsGenerated.push(product.generated);
   })
 
   Promise.all(productsGenerated).then(() => {
