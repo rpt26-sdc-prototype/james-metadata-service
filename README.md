@@ -15,9 +15,8 @@
 
 ## Requirements
 
-- Node 6.13.0
+- Node 6.13.0 or higher
 - Mysql 5.7
-- etc
 
 
 ## Seeding the Database
@@ -48,6 +47,5 @@ From within the root directory:
 ```sh
 npm install -g webpack
 npm install -g webpack-cli
-npm install -g nodemon
 npm install
 ```
