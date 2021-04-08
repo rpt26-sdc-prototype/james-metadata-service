@@ -1,11 +1,12 @@
 const mysql = require('mysql');
 
 let connection = mysql.createConnection({
-  host: 'localhost',
+  host: 'database',
   user: 'root',
-  password: '',
+  password: process.env.DB_PASS,
   database: 'fec_pathfinder_metadata'
 });
+console.log(process.env.DB_PASS);
 
 connection.connect((err) => {
     if (err) {

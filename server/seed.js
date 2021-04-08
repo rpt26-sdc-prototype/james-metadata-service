@@ -1,4 +1,8 @@
+const Path = require('path');
+require('dotenv').config({path: Path.resolve(__dirname, '../.env')});
 const Promise = require('bluebird');
+
+
 
 //Classes
 var SteamProduct = require('./classes/steamProduct');
