@@ -27,3 +27,4 @@ public/
 
 #Secrets
 .env
+*.pem

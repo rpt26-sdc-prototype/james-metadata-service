@@ -2,6 +2,7 @@ version: "3.8"
 services:
   server:
     build: .
+    image: jhenderson19/james-metadata-service
     ports:
       - 80:4032
   database:

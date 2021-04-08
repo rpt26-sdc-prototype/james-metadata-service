@@ -6,7 +6,6 @@ let connection = mysql.createConnection({
   password: process.env.DB_PASS,
   database: 'fec_pathfinder_metadata'
 });
-console.log(process.env.DB_PASS);
 
 connection.connect((err) => {
     if (err) {
