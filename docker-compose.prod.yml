@@ -6,12 +6,14 @@ services:
     ports:
       - 80:4032
       - 443:4032
+    restart: unless-stopped
   database:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
     ports:
       - 3306:3306
+    restart: unless-stopped
     volumes:
       - db-config:/etc/mysql
       - db-data:/var/lib/mysql
