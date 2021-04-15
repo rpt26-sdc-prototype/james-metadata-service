@@ -15,7 +15,7 @@
 
 ## Requirements
 
-- Docker STRONGLY recommended.
+- Docker, docker-compose, docker-engine, and docker-machine strongly recommended
 - Node 6.13.0 or higher
 - Mysql 5.7
 
@@ -50,3 +50,6 @@ npm install -g webpack
 npm install -g webpack-cli
 npm install
 ```
+
+
+## Environments
