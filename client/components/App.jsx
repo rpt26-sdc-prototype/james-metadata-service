@@ -37,8 +37,7 @@ class App extends React.Component {
       this.setState({
         product: response.data
       })
-      document.title = response.data.title + ' on Steam';
-    })
+    });
   }
 
   componentDidMount() {
