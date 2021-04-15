@@ -8,10 +8,15 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "compile": "webpack --mode development",
+    "compile": "webpack --mode production",
+    "compile-dev": "webpack --mode development --watch",
     "start": "nodemon ./server/index.js",
+    "start-dev": "nodemon ./server/index.js development",
+    "start-prod": "nodemon ./server/index.js production",
     "seed": "node ./server/seed.js",
-    "test": "jest --coverage"
+    "seed-dev": "node ./server/seed.js development",
+    "seed-prod": "node ./server/seed.js production",
+    "test": "jest --coverage testing"
   },
   "dependencies": {
     "axios": "^0.21.1",

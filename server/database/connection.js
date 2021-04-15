@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 
 let connection = mysql.createConnection({
-  host: 'database',
-  user: 'root',
-  password: process.env.DB_PASS,
-  database: 'fec_pathfinder_metadata'
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'fec_pathfinder_metadata'
 });
 
 connection.connect((err) => {

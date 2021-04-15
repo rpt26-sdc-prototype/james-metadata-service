@@ -1,4 +1,7 @@
 node_modules/
 public/
 *.pem
-docker-compose.prod.yml
+*.yml
+.dockerignore
+.gitignore
+*.env

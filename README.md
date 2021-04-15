@@ -15,6 +15,7 @@
 
 ## Requirements
 
+- Docker STRONGLY recommended.
 - Node 6.13.0 or higher
 - Mysql 5.7
 

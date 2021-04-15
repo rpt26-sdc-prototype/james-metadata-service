@@ -1,5 +1,5 @@
 import React from 'react';
-import css from '../styles/buyWidget.css'
+import css from '../styles/buyWidget.css';
 
 const BuyWidget = (props) => {
   return (

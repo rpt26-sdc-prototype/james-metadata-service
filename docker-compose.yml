@@ -1,20 +1,22 @@
 version: "3.8"
 services:
   server:
-    build: .
+    env_file: '.dev.env'
+    build:
+      context: .
     image: jhenderson19/james-metadata-service
     ports:
-      - 80:4032
-      - 443:4032
+      - 4032:4032
   database:
+    env_file: '.dev.env'
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
     ports:
       - 3306:3306
     volumes:
-      - db-config:/etc/mysql
-      - db-data:/var/lib/mysql
+      - db-config-dev:/etc/mysql
+      - db-data-dev:/var/lib/mysql
 volumes:
-  db-data:
-  db-config:
+  db-data-dev:
+  db-config-dev:

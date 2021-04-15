@@ -22,7 +22,6 @@ module.exports = {
       template: path.resolve(__dirname, "client", "index.html")
     })
   ],
-  watch: false,
   watchOptions: {
     ignored: /node_modules/
   }

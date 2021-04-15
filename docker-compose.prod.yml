@@ -1,13 +1,16 @@
 version: "3.8"
 services:
   server:
-    build: .
+    env_file: '.prod.env'
+    build:
+      context: .
     image: jhenderson19/james-metadata-service
     ports:
       - 80:4032
       - 443:4032
     restart: unless-stopped
   database:
+    env_file: '.prod.env'
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
@@ -15,8 +18,8 @@ services:
       - 3306:3306
     restart: unless-stopped
     volumes:
-      - db-config:/etc/mysql
-      - db-data:/var/lib/mysql
+      - db-config-prod:/etc/mysql
+      - db-data-prod:/var/lib/mysql
 volumes:
-  db-data:
-  db-config:
+  db-data-prod:
+  db-config-prod:
