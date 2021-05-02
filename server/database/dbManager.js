@@ -106,10 +106,14 @@ class DataManager {
     })
   }
 
+  updateGame(id, key, value) {
+    return db.queryAsync(`UPDATE games SET ${key} = ? WHERE id = ?`, [value, id]);
+  }
+
   deleteGame(id) {
     return db.queryAsync(`DELETE FROM item_genre_joinTable WHERE id_games = ${id}`)
     .then(() => {
-      return db.queryAsync(`DELETE FROM games WHERE id = ${id}`)
+      return db.queryAsync(`DELETE FROM games WHERE id = ${id}`);
     });
   }
 

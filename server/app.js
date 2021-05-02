@@ -20,11 +20,36 @@ app.use(bodyParser.json());
 
 //api endpoints
 
+//create
+app.post('/api/product/', (req, res, next) => {
+  productID = req.originalUrl.slice('/api/product/'.length);
+  product = req.body;
+
+  dbManager.insertGame(product).then((product) => {
+    res.status(201).send(product);
+  }).catch((error) => {
+    res.status(400).send(error);
+  })
+});
+
 //read
 app.get('/api/product/*', (req, res, next) => {
   productID = req.originalUrl.slice('/api/product/'.length);
 
   dbManager.getGame(productID).then((product) => {
+    res.status(200).send(product);
+  }).catch((error) => {
+    res.status(404).send(error);
+  })
+});
+
+//update
+app.put('/api/product/*', (req, res, next) => {
+  productID = req.originalUrl.slice('/api/product/'.length);
+  key = Object.keys(req.body)[0];
+  value = req.body[key];
+
+  dbManager.updateGame(productID, key, value).then((product) => {
     res.status(200).send(product);
   }).catch((error) => {
     res.status(404).send(error);
