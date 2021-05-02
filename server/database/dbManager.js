@@ -106,6 +106,13 @@ class DataManager {
     })
   }
 
+  deleteGame(id) {
+    return db.queryAsync(`DELETE FROM item_genre_joinTable WHERE id_games = ${id}`)
+    .then(() => {
+      return db.queryAsync(`DELETE FROM games WHERE id = ${id}`)
+    });
+  }
+
   closeConnection() {
     db.closeConnection();
   }

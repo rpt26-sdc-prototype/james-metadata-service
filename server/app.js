@@ -19,6 +19,8 @@ app.use(bodyParser.json());
 
 
 //api endpoints
+
+//read
 app.get('/api/product/*', (req, res, next) => {
   productID = req.originalUrl.slice('/api/product/'.length);
 
@@ -29,7 +31,19 @@ app.get('/api/product/*', (req, res, next) => {
   })
 });
 
+//delete
+app.delete('/api/product/*', (req, res, next) => {
+  productID = req.originalUrl.slice('/api/product/'.length);
 
+  dbManager.deleteGame(productID).then((product) => {
+    res.status(200).json({
+      sucess: true,
+      data: {}
+    });
+  }).catch((error) => {
+    res.status(404).send(error);
+  })
+});
 
 //serve static files
 app.get('*/index.js', (req, res) => {
