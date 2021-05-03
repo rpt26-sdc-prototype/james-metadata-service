@@ -22,11 +22,12 @@ app.use(bodyParser.json());
 
 //create
 app.post('/api/product/', (req, res, next) => {
-  productID = req.originalUrl.slice('/api/product/'.length);
+  // productID = req.originalUrl.slice('/api/product/'.length);
   product = req.body;
 
   dbManager.insertGame(product).then((product) => {
-    res.status(201).send(product);
+    // console.log('product: ', product);
+    res.status(201).send('game created');
   }).catch((error) => {
     res.status(400).send(error);
   })

@@ -35,7 +35,8 @@ class DataManager {
     var genrePromises = [];
     product.genres.forEach((genre) => {
       genrePromises.push(db.queryAsync(`SELECT id FROM genres WHERE name = '${genre.name}'`).then((data) => {
-        return data[0].id;
+        // return data[0].id;
+        return genrePromises[0].id;
       }));
     })
 
