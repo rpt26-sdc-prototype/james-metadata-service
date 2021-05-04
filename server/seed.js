@@ -1,6 +1,8 @@
 const Path = require('path');
 let args = process.argv.slice(2);
 
+console.time();
+
 switch(args[0]) {
   case 'production':
     require('dotenv').config({path: Path.resolve(__dirname, '../.prod.env')});
@@ -111,3 +113,5 @@ dbManager.initializeDatabase().then(() => {
     process.exit(0);
   })
 });
+
+console.timeEnd();

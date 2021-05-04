@@ -35,15 +35,13 @@ class DataManager {
     var genrePromises = [];
     product.genres.forEach((genre) => {
       genrePromises.push(db.queryAsync(`SELECT id FROM genres WHERE name = '${genre.name}'`).then((data) => {
-        // return data[0].id;
-        return genrePromises[0].id;
+        return data.length === 0 ? genrePromises[0].id : data[0].id;
       }));
     })
 
     return db.queryAsync(`INSERT INTO games (name, price, description, shortDescription, developer, publisher, releaseDate)
       VALUES ('${product.name}', ${product.price * 100}, '${product.description}', '${product.shortDescription}', '${product.developer}', '${product.publisher}', ${product.releaseDate})`)
       .then((returnData) => {
-
         return Promise.all(genrePromises).then((genreIds) => {
           var relationshipPromises = [];
           genreIds.forEach((id) => {
