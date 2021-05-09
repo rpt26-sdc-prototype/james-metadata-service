@@ -22,11 +22,9 @@ app.use(bodyParser.json());
 
 //create
 app.post('/api/product/', (req, res, next) => {
-  // productID = req.originalUrl.slice('/api/product/'.length);
   product = req.body;
 
   dbManager.insertGame(product).then((product) => {
-    // console.log('product: ', product);
     res.status(201).send('game created');
   }).catch((error) => {
     res.status(400).send(error);
@@ -37,7 +35,6 @@ app.post('/api/product/', (req, res, next) => {
 app.get('/api/product/*', (req, res, next) => {
   productID = req.originalUrl.slice('/api/product/'.length);
   dbManager.getGame(productID).then((product) => {
-    console.log('product', product);
     res.status(200).send(product);
   }).catch((error) => {
     res.status(404).send(error);
@@ -79,6 +76,5 @@ app.get('*/index.js', (req, res) => {
 app.get('/:id', (req, res) => {
   res.sendFile(path.join(__dirname,'..','public','index.html'));
 })
-
 
 module.exports = {app, port};
