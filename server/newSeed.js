@@ -1,8 +1,6 @@
 const Path = require('path');
 let args = process.argv.slice(2);
 
-console.time();
-
 switch(args[0]) {
   case 'production':
     require('dotenv').config({path: Path.resolve(__dirname, '../.prod.env')});
@@ -17,20 +15,16 @@ switch(args[0]) {
 
 const Promise = require('bluebird');
 
+const SteamProduct = require('./classes/steamProduct');
+const Genre = require('./classes/genre');
+const dbManager = require('./database/dbManager');
 
-
-//Classes
-var SteamProduct = require('./classes/steamProduct');
-var Genre = require('./classes/genre');
-var dbManager = require('./database/dbManager');
-
-var products = [];
-var genres = [];
+const products = [];
+const genres = [];
 
 console.log('preparing to seed database...');
 
 dbManager.initializeDatabase().then(() => {
-  //Generate Genres
   console.log('Generating Genres...');
   genres.push(new Genre('Strategy'));
   genres.push(new Genre('Real Time Strategy'));
@@ -55,36 +49,17 @@ dbManager.initializeDatabase().then(() => {
   genres.push(new Genre('Racing'));
   genres.push(new Genre('Party'));
 
-  //Generate guaranteed product
   console.log('Generating Products...');
-
-  // products.push(new SteamProduct({
-  //   name: "Age of Empires II: Definitive Edition",
-  //   price: 19.99,
-  //   description: `<p>Age of Empires II: Definitive Edition celebrates the 20th anniversary of one of the most popular strategy games ever with stunning 4K Ultra HD graphics, a new and fully remastered soundtrack, and brand-new content, “The Last Khans” with 3 new campaigns and 4 new civilizations.</p>
-
-  //   <p>Explore all the original campaigns like never before as well as the best-selling expansions, spanning over 200 hours of gameplay and 1,000 years of human history. Head online to challenge other players with 35 different civilizations in your quest for world domination throughout the ages.</p>
-
-  //   <p>Choose your path to greatness with this definitive remaster to one of the most beloved strategy games of all time.</p>
-
-  //   <a href="https://privacy.microsoft.com/privacystatement">https://privacy.microsoft.com/privacystatement</a>`,
-  //   shortDescription: `Age of Empires II: Definitive Edition celebrates the 20th anniversary of one of the most popular strategy games ever with stunning 4K Ultra HD graphics, a new and fully remastered soundtrack, and brand-new content, “The Last Khans” with 3 new campaigns and 4 new civilizations.`,
-  //   developer: 'Forgotton Empires',
-  //   publisher: 'Xbox Game Studios',
-  //   releaseDate: new Date('14 Nov 2019').getTime(),
-  //   genres: [genres[0]]
-  // }));
-  //generate 99 fake games
-  for (var i = 0; i < 1000; i++) {
-    var options = {genres: []};
-    //Generate random genres
-    for (var j = 0; j < Math.floor(Math.random() * 4) + 1; j++) {
+  const numberOfRecords = 100;
+  for (let i = 0; i < numberOfRecords; i++) {
+    const options = {genres: []};
+    for (let j = 0; j < Math.floor(Math.random() * 4) + 1; j++) {
       options.genres.push(genres[Math.floor(Math.random() * genres.length)]);
     }
     products.push(new SteamProduct(options));
   }
 
-  var productsGenerated = [];
+  const productsGenerated = [];
 
   products.forEach(product => {
     productsGenerated.push(Promise.all(product.generated));
@@ -92,7 +67,7 @@ dbManager.initializeDatabase().then(() => {
 
   Promise.all(productsGenerated).then(() => {
     console.log('Adding Genres to database...');
-    var genresInserted = [];
+    const genresInserted = [];
     genres.forEach(genre => {
       genresInserted.push(dbManager.insertGenre(genre));
     })
@@ -101,7 +76,7 @@ dbManager.initializeDatabase().then(() => {
 
   }).then(() => {
     console.log('Adding Products to database....');
-    var productsInserted = []
+    const productsInserted = []
     products.forEach(product => {
       productsInserted.push(dbManager.insertGame(product));
     });
@@ -110,7 +85,6 @@ dbManager.initializeDatabase().then(() => {
 
   }).then(() => {
     console.log('Database Seeded!');
-    console.timeEnd();
     process.exit(0);
   })
 });

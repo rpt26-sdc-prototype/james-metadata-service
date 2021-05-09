@@ -34,6 +34,7 @@ CREATE TABLE `games` (
   `price` INTEGER NULL DEFAULT NULL,
   `description` LONGBLOB NULL,
   `shortDescription` BLOB NULL,
+  -- `genre` VARCHAR(100),
   `developer` VARCHAR(100) NULL DEFAULT 'NULL',
   `publisher` VARCHAR(100) NULL DEFAULT NULL,
   `releaseDate` BIGINT NULL DEFAULT NULL,

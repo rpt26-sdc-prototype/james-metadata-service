@@ -1,8 +1,6 @@
 const Path = require('path');
 let args = process.argv.slice(2);
 
-console.time();
-
 switch(args[0]) {
   case 'production':
     require('dotenv').config({path: Path.resolve(__dirname, '../.prod.env')});
@@ -62,11 +60,8 @@ dbManager.initializeDatabase().then(() => {
     name: "Age of Empires II: Definitive Edition",
     price: 19.99,
     description: `<p>Age of Empires II: Definitive Edition celebrates the 20th anniversary of one of the most popular strategy games ever with stunning 4K Ultra HD graphics, a new and fully remastered soundtrack, and brand-new content, “The Last Khans” with 3 new campaigns and 4 new civilizations.</p>
-
     <p>Explore all the original campaigns like never before as well as the best-selling expansions, spanning over 200 hours of gameplay and 1,000 years of human history. Head online to challenge other players with 35 different civilizations in your quest for world domination throughout the ages.</p>
-
     <p>Choose your path to greatness with this definitive remaster to one of the most beloved strategy games of all time.</p>
-
     <a href="https://privacy.microsoft.com/privacystatement">https://privacy.microsoft.com/privacystatement</a>`,
     shortDescription: `Age of Empires II: Definitive Edition celebrates the 20th anniversary of one of the most popular strategy games ever with stunning 4K Ultra HD graphics, a new and fully remastered soundtrack, and brand-new content, “The Last Khans” with 3 new campaigns and 4 new civilizations.`,
     developer: 'Forgotton Empires',
@@ -110,7 +105,6 @@ dbManager.initializeDatabase().then(() => {
 
   }).then(() => {
     console.log('Database Seeded!');
-    console.timeEnd();
     process.exit(0);
   })
 });
