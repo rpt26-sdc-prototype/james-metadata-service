@@ -10,7 +10,6 @@ const dbManager = require('./database/dbManager.js');
 
 //Custom Classes
 const SteamProduct = require('./classes/steamProduct.js');
-const Genre = require('./classes/genre.js');
 
 //middleware import and activation
 const bodyParser = require('body-parser');

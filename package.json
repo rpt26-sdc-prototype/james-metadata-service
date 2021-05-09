@@ -13,7 +13,7 @@
     "start": "nodemon ./server/index.js",
     "start-dev": "nodemon ./server/index.js development",
     "start-prod": "nodemon ./server/index.js production",
-    "seed": "node ./server/newSeed.js",
+    "seed": "node ./server/seed.js",
     "seed-dev": "node ./server/seed.js development",
     "seed-prod": "node ./server/seed.js production",
     "test": "jest --coverage testing"

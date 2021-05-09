@@ -1,7 +1,6 @@
 const Promise = require('bluebird');
 const db = Promise.promisifyAll(require('./connection.js'));
 const SteamProduct = require('../classes/steamProduct.js');
-const Genre = require('../classes/genre.js');
 
 class DataManager {
   constructor() { }
