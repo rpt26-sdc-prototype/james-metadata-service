@@ -1,7 +1,7 @@
-class Genre {
-  constructor(name) {
-    this.name = name;
-  }
-}
+// class Genre {
+//   constructor(name) {
+//     this.name = name;
+//   }
+// }
 
-module.exports = Genre;
+// module.exports = Genre;

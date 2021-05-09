@@ -18,7 +18,7 @@ class App extends React.Component {
         developer: '',
         publisher: '',
         releaseDate: '',
-        genres: [],
+        genre: '',
         description: '',
         shortDescription: ''
       }

@@ -36,8 +36,8 @@ app.post('/api/product/', (req, res, next) => {
 //read
 app.get('/api/product/*', (req, res, next) => {
   productID = req.originalUrl.slice('/api/product/'.length);
-
   dbManager.getGame(productID).then((product) => {
+    console.log('product', product);
     res.status(200).send(product);
   }).catch((error) => {
     res.status(404).send(error);

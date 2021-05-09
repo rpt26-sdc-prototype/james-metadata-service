@@ -22,6 +22,9 @@ const randTables = {
       ': Not Enough Dakka', ' Unleashed', ': Complete', ': Game of the Year Edition', ' XIII-2', ' 538-D'
     ]
   },
+  genres: [
+    'Strategy', 'Real Time Strategy', 'Turn Based Strategy', 'First Person Shooter', 'Third Person Shooter', '4X', 'Puzzle', 'Action', 'Adventure', 'Open-world', 'Linear', 'Platformer', 'Cooperative', 'Battle-Royale', 'Competititve', 'Team Based', 'Visual Novel', '2D', 'Massively Multiplayer', 'Card Games on Motorcycles', 'Racing', 'Party'
+  ],
   developer: [
     'Valve', 'Digital Extremes', 'Blizzard', 'Sierra', 'Game Making Company 001', 'RandoMakers', 'Develoboys', 'Pathfinder', 'RPT26', 'Hack Reactor',
     'Nintendo', 'Rareware', 'DICE'
@@ -40,10 +43,11 @@ class SteamProduct {
     options.price !== undefined ? this.price = options.price : this.setRandPrice();
     options.description !== undefined ? this.description = options.description : this.setRandDescription();
     options.shortDescription !== undefined ? this.shortDescription = options.shortDescription : this.setRandShortDescription();
+    options.genre !== undefined ? this.genre = options.genre : this.setRandGenre();
     options.developer !== undefined ? this.developer = options.developer : this.setRandDeveloper();
     options.publisher !== undefined ? this.publisher = options.publisher : this.setRandPublisher();
     options.releaseDate !== undefined ? this.releaseDate = options.releaseDate : this.setRandReleaseDate();
-    options.genres !== undefined ? this.genres = options.genres : this.genres = [];
+    // options.genre !== undefined ? this.genre = options.genre : this.genres = [];
   }
 
   setRandName() {
@@ -82,6 +86,10 @@ class SteamProduct {
       this.shortDescription = 'Description not found...';
     })
     this.generated.push(this.shortDescription);
+  }
+
+  setRandGenre() {
+    this.genre = randTables.genres[Math.floor(Math.random() * randTables.genres.length)];
   }
 
   setRandDeveloper() {

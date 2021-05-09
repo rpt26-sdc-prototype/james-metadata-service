@@ -12,7 +12,7 @@ test('product has all required properties', () => {
     expect(product.shortDescription).toBeDefined();
     expect(product.developer).toBeDefined();
     expect(product.publisher).toBeDefined();
-    expect(product.genres).toBeDefined();
+    expect(product.genre).toBeDefined();
   })
 });
 

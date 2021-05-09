@@ -8,54 +8,60 @@ class DataManager {
 
   //Init Database
   initializeDatabase() {
-    return db.queryAsync("DROP TABLE IF EXISTS `item_genre_joinTable`;")
-      .then(()=>{
-      return db.queryAsync("CREATE TABLE `item_genre_joinTable` (`id` INTEGER NOT NULL AUTO_INCREMENT, `id_games` INTEGER NULL DEFAULT NULL, `id_genres` INTEGER NULL DEFAULT NULL, PRIMARY KEY (`id`));");
-    }).then(() => {
-      return db.queryAsync("DROP TABLE IF EXISTS `games`;");
-    }).then(() => {
-      return db.queryAsync("CREATE TABLE `games` (`id` INTEGER NOT NULL AUTO_INCREMENT, `name` VARCHAR(100) NULL DEFAULT 'NULL', `price` INTEGER NULL DEFAULT NULL, `description` LONGBLOB NULL, `shortDescription` BLOB NULL, `developer` VARCHAR(100) NULL DEFAULT 'NULL', `publisher` VARCHAR(100) NULL DEFAULT NULL, `releaseDate` BIGINT NULL DEFAULT NULL, PRIMARY KEY (`id`));");
-    }).then(() => {
-      return db.queryAsync("DROP TABLE IF EXISTS `genres`;");
-    }).then(() => {
-      return db.queryAsync("CREATE TABLE `genres` (`id` INTEGER NOT NULL AUTO_INCREMENT, `name` VARCHAR(100) NULL DEFAULT NULL, PRIMARY KEY (`id`));");
-    }).then(() => {
-      return db.queryAsync("ALTER TABLE `item_genre_joinTable` ADD FOREIGN KEY (id_games) REFERENCES `games` (`id`);");
-    }).then(() => {
-      return db.queryAsync("ALTER TABLE `item_genre_joinTable` ADD FOREIGN KEY (id_genres) REFERENCES `genres` (`id`);");
-    })
+    // return db.queryAsync("DROP TABLE IF EXISTS `item_genre_joinTable`;")
+    //   .then(()=>{
+    //   return db.queryAsync("CREATE TABLE `item_genre_joinTable` (`id` INTEGER NOT NULL AUTO_INCREMENT, `id_games` INTEGER NULL DEFAULT NULL, `id_genres` INTEGER NULL DEFAULT NULL, PRIMARY KEY (`id`));");
+    // }).then(() => {
+      // return db.queryAsync("DROP TABLE IF EXISTS `games`;");
+    // }).then(() => {
+    return db.queryAsync("DROP TABLE IF EXISTS `games`;")
+      .then(() => {
+      return db.queryAsync("CREATE TABLE `games` (`id` INTEGER NOT NULL AUTO_INCREMENT, `name` VARCHAR(100) NULL DEFAULT 'NULL', `price` INTEGER NULL DEFAULT NULL, `description` LONGBLOB NULL, `shortDescription` BLOB NULL, `genre` VARCHAR(100), `developer` VARCHAR(100) NULL DEFAULT 'NULL', `publisher` VARCHAR(100) NULL DEFAULT NULL, `releaseDate` BIGINT NULL DEFAULT NULL, PRIMARY KEY (`id`));");
+    // }).then(() => {
+    //   return db.queryAsync("DROP TABLE IF EXISTS `genres`;");
+    // }).then(() => {
+    //   return db.queryAsync("CREATE TABLE `genres` (`id` INTEGER NOT NULL AUTO_INCREMENT, `name` VARCHAR(100) NULL DEFAULT NULL, PRIMARY KEY (`id`));");
+    // }).then(() => {
+    //   return db.queryAsync("ALTER TABLE `item_genre_joinTable` ADD FOREIGN KEY (id_games) REFERENCES `games` (`id`);");
+    // }).then(() => {
+    //   return db.queryAsync("ALTER TABLE `item_genre_joinTable` ADD FOREIGN KEY (id_genres) REFERENCES `genres` (`id`);");
+    // })
+    });
   }
 
   //CREATE
-  insertGenre(genre) {
-    return db.queryAsync(`INSERT INTO genres (name) VALUES ('${genre.name}')`);
-  }
+  // insertGenre(genre) {
+  //   return db.queryAsync(`INSERT INTO genres (name) VALUES ('${genre.name}')`);
+  // }
 
   insertGame(product) {
-    var genrePromises = [];
-    product.genres.forEach((genre) => {
-      genrePromises.push(db.queryAsync(`SELECT id FROM genres WHERE name = '${genre.name}'`).then((data) => {
-        return data.length === 0 ? genrePromises[0].id : data[0].id;
-      }));
-    })
+    // var genrePromises = [];
+    // product.genres.forEach((genre) => {
+    //   genrePromises.push(db.queryAsync(`SELECT id FROM genres WHERE name = '${genre.name}'`).then((data) => {
+    //     return data.length === 0 ? genrePromises[0].id : data[0].id;
+    //   }));
+    // })
+  //  console.log('product', product);
+    // return db.queryAsync(`INSERT INTO games (name, price, description, shortDescription, genre, developer, publisher, releaseDate)
+    //   VALUES ('${product.name}', ${product.price * 100}, '${product.description}', '${product.shortDescription}', '${product.genre}', ${product.developer}', '${product.publisher}', ${product.releaseDate})`)
+    return db.queryAsync(`INSERT INTO games (name, price, description, shortDescription, genre, developer, publisher, releaseDate)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,[product.name, product.price * 100, product.description, product.shortDescription, product.genre, product.developer, product.publisher, product.releaseDate])
+      // .then((returnData) => {
+      //   return Promise.all(genrePromises).then((genreIds) => {
+      //     var relationshipPromises = [];
+      //     genreIds.forEach((id) => {
+      //       relationshipPromises.push(db.queryAsync(`INSERT INTO item_genre_joinTable (id_games, id_genres) VALUES (${returnData.insertId}, ${id})`).catch((err)=> {
+      //         console.error(err);
+      //       }));
+      //     });
+      //     return Promise.all(relationshipPromises);
+        // });
 
-    return db.queryAsync(`INSERT INTO games (name, price, description, shortDescription, developer, publisher, releaseDate)
-      VALUES ('${product.name}', ${product.price * 100}, '${product.description}', '${product.shortDescription}', '${product.developer}', '${product.publisher}', ${product.releaseDate})`)
-      .then((returnData) => {
-        return Promise.all(genrePromises).then((genreIds) => {
-          var relationshipPromises = [];
-          genreIds.forEach((id) => {
-            relationshipPromises.push(db.queryAsync(`INSERT INTO item_genre_joinTable (id_games, id_genres) VALUES (${returnData.insertId}, ${id})`).catch((err)=> {
-              console.error(err);
-            }));
-          });
-          return Promise.all(relationshipPromises);
-        });
-
-      })
+      // })
   }
 
   getGame(id) {
+    // return db.queryAsync(`Select * from games where id = ${id}`)
     return db.queryAsync(`Select * from games where id = ${id}`)
     .then((data) => {
       //Translate Date
@@ -92,16 +98,17 @@ class DataManager {
 
       data[0].description = data[0].description.toString('utf-8');
       data[0].shortDescription = data[0].shortDescription.toString('utf-8');
-      data[0].genres = [];
+      // data[0].genres = [];
+      return data[0];
+      console.log('data', data[0]);
 
-
-      return db.queryAsync(`SELECT genres.name FROM genres INNER JOIN item_genre_joinTable WHERE item_genre_joinTable.id_games = ${id} AND item_genre_joinTable.id_genres = genres.id`)
-      .then((genres) => {
-        genres.forEach((genre) => {
-          data[0].genres.push(genre.name);
-        })
-        return data[0];
-      })
+      // return db.queryAsync(`SELECT genres.name FROM genres INNER JOIN item_genre_joinTable WHERE item_genre_joinTable.id_games = ${id} AND item_genre_joinTable.id_genres = genres.id`)
+      // .then((genres) => {
+      //   genres.forEach((genre) => {
+      //     data[0].genres.push(genre.name);
+      //   })
+      //   return data[0];
+      // })
     })
   }
 
@@ -110,10 +117,10 @@ class DataManager {
   }
 
   deleteGame(id) {
-    return db.queryAsync(`DELETE FROM item_genre_joinTable WHERE id_games = ${id}`)
-    .then(() => {
+    // return db.queryAsync(`DELETE FROM item_genre_joinTable WHERE id_games = ${id}`)
+    // .then(() => {
       return db.queryAsync(`DELETE FROM games WHERE id = ${id}`);
-    });
+    // });
   }
 
   closeConnection() {
