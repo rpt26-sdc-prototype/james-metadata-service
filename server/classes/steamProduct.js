@@ -34,7 +34,6 @@ const randTables = {
   ]
 }
 
-
 class SteamProduct {
   constructor(options = {}) {
     this.generated = []; //contains promises, when all are resolved, the generation of this object is complete
@@ -47,7 +46,6 @@ class SteamProduct {
     options.developer !== undefined ? this.developer = options.developer : this.setRandDeveloper();
     options.publisher !== undefined ? this.publisher = options.publisher : this.setRandPublisher();
     options.releaseDate !== undefined ? this.releaseDate = options.releaseDate : this.setRandReleaseDate();
-    // options.genre !== undefined ? this.genre = options.genre : this.genres = [];
   }
 
   setRandName() {

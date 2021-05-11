@@ -29,3 +29,5 @@ public/
 *.env
 *.pem
 config.js
+
+*.json
