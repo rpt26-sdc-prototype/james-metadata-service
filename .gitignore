@@ -30,4 +30,5 @@ public/
 *.pem
 config.js
 
+*.csv
 *.json
