@@ -3,8 +3,8 @@ const fs = require('fs');
 
 const monthMS = 30 * 24 * 60 * 60 * 1000; //30 days, 24 hours, 60 minutes, 60 seconds, 1000 ms
 
-const generateGames = (num) => {
-  const games = [];
+const generateSampleGames = (num) => {
+  const sampleGames = [];
   const randTables = {
     name: {
       prefixes: [
@@ -38,7 +38,7 @@ const generateGames = (num) => {
     ]
   }
 
-  const setRandName = () => {
+  const setRandName = (num) => {
     const lengths = {
       prefixes: randTables.name.prefixes.length,
       infixes: randTables.name.infixes.length,
@@ -58,6 +58,14 @@ const generateGames = (num) => {
     return price;
   }
 
+  const setRandDesc = () => {
+    return descriptions[Math.floor(Math.random() * descriptions.length)];
+  };
+
+  const setRandShortDesc = () => {
+    return shortDescriptions[Math.floor(Math.random() * shortDescriptions.length)];
+  };
+
   const setRandGenre = () => {
     return randTables.genres[Math.floor(Math.random() * randTables.genres.length)];
   }
@@ -74,30 +82,52 @@ const generateGames = (num) => {
     return Math.floor(Math.random() * new Date('December 31, 2019 11:59:59').getTime() );
   }
 
-  let name;
-  for (let i = 0; i < num; i++) {
-    name = setRandName();
+  let count = 0;
+  const names = [];
+  const prices = [];
+  const descriptions = [];
+  const shortDescriptions = [];
+  const genres = [];
+  const developers = [];
+  const publishers = [];
+  const releaseDates = [];
+
+  while (count < num) {
     const game = {
-      id: i + 1,
-      name,
+      name: setRandName(),
       price: setRandPrice(),
-      description: faker.lorem.paragraphs(faker.random.number({min: 3, max: 8})),
+      description: faker.lorem.paragraphs(3),
       shortDescription: faker.lorem.paragraph(),
       genre: setRandGenre(),
       developer: setRandDeveloper(),
       publisher: setRandPublisher(),
-      releaseDate: setRandReleaseDate()
+      releaseDate: setRandReleaseDate(),
+    }
+    sampleGames.push(game);
+    count += 1;
+  };
+
+  return sampleGames;
+}
+sampleGames = generateSampleGames(100);
+let id = 1;
+
+const writeJSON = (batchSize) => {
+  const games = [];
+  for (let i = 0; i < batchSize; i++) {
+    const index = Math.floor(Math.random() * sampleGames.length);
+    const game = {
+      id: id++,
+      game: sampleGames[index]
     };
     games.push(game);
   }
   fs.writeFileSync('./server/database/games.json', JSON.stringify(games, null, '\t'));
 };
 
-const numOfRecords = 100;
+const numOfRecords = 10;
 const start = new Date().getTime();
-
-generateGames(numOfRecords);
-
+writeJSON(numOfRecords);
 const end = new Date().getTime();
 const secs = (end - start) / 1000;
-console.log(`${numOfRecords} records generated in ${secs} seconds`);
+console.log(`${numOfRecords / 1e6} million records generated in ${secs} seconds`);
