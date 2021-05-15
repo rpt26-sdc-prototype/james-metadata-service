@@ -5,7 +5,14 @@ CREATE DATABASE sdc;
 
 CREATE TABLE games (
   id integer PRIMARY KEY,
-  game jsonb
+  name text,
+  price numeric(4,2),
+  description text,
+  shortDescription text,
+  genre text,
+  developer text,
+  publisher text,
+  releaseDate bigint
 );
 
-\copy games FROM 'games.csv' WITH (FORMAT csv, HEADER);
+\copy games(id,name,price,description,shortDescription,genre,developer,publisher,releaseDate) FROM 'server/database/games.csv' DELIMITER ',' CSV HEADER;

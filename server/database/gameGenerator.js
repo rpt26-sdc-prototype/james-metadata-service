@@ -50,7 +50,7 @@ const setRandPrice = () => {
   let price = (Math.floor(Math.random() * 12) * 500);
   Math.random() < .05 ? price *= Math.floor(Math.random() * 5) : null;
   Math.random() < .5 ? price += 99 : null;
-  price /= 100;
+  price = price / 100 + 1;
   return price;
 }
 
@@ -84,9 +84,8 @@ const setRandReleaseDate = () => {
   return releaseDate;
 }
 
-const generateGame = (id) => {
+const generateGame = () => {
   const game = {
-    id,
     name: setRandName(),
     price: setRandPrice(),
     description: faker.lorem.paragraphs(3),
