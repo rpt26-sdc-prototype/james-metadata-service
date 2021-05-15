@@ -6,7 +6,7 @@ CREATE DATABASE sdc;
 CREATE TABLE games (
   id integer PRIMARY KEY,
   name text,
-  price numeric(4,2),
+  price numeric(5,2),
   description text,
   shortDescription text,
   genre text,

@@ -16,7 +16,7 @@ const randTables = {
       'Odyssey', 'Galaxy', 'Kazooie', '64'
     ],
     suffixes: [
-      ' II', ' 2', ' 2: Electric Boogaloo', ' III', ' 3', ' 3: Nuclear Powered Beegalee', ' IV', ' 4', ': 40,000', ': Revengenance', ' 2016', ' 2017',
+      ' II', ' 2', ' 2: Electric Boogaloo', ' III', ' 3', ' 3: Nuclear Powered Beegalee', ' IV', ' 4', ': Legendary Edition', ': Revengenance', ' 2016', ' 2017',
       ' 2018', ' 2019', ' 2020', ': Pandemic Edition', ': Unnecessarily Subtitled', ': Maximum Overtime', ': Unrated and Uncut', ': Family Friendly!',
       ': Deluxe', ': The Third', ': The Second', ': Classic', ': Source', ': VR Edition', ' 237', '™',
       ': Not Enough Dakka', ' Unleashed', ': Complete', ': Game of the Year Edition', ' XIII-2', ' 538-D'
