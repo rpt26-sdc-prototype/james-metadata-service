@@ -12,16 +12,8 @@ const writeCSV = (writer, encoding, callback) => {
     do {
       i -= 1;
       id += 1;
-      const game = generateGame();
-      const name = game.name;
-      const price = game.price;
-      const description = JSON.stringify(game.description);
-      const shortDescription = JSON.stringify(game.shortDescription);
-      const genre = game.genre;
-      const developer = game.developer;
-      const publisher = game.publisher;
-      const releaseDate = game.releaseDate;
-      const data = `${id},${name},${price},${description},${shortDescription},${genre},${developer},${publisher},${releaseDate}\n`;
+      const { name, price, description, shortDescription, genre, developer, publisher, releaseDate } = generateGame();
+      const data = `${id},${name},${price},${JSON.stringify(description)},${JSON.stringify(shortDescription)},${genre},${developer},${publisher},${releaseDate}\n`;
       if (i === 0) {
         writer.write(data, encoding, callback);
       } else {
