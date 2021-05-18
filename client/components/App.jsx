@@ -17,10 +17,10 @@ class App extends React.Component {
         price: '',
         developer: '',
         publisher: '',
-        releaseDate: '',
+        releasedate: '',
         genre: '',
         description: '',
-        shortDescription: ''
+        shortdescription: ''
       }
     }
   }
