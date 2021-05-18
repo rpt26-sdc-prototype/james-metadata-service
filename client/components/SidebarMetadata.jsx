@@ -25,7 +25,7 @@ const SidebarMetadata = (props) => {
       <span className='metadataLabel'>GENRE:</span> <a href='' className='metadataLink'>{props.product.genre}</a><br />
       <span className='metadataLabel'>DEVELOPER:</span> <a href='' className='metadataLink'>{props.product.developer}</a><br />
       <span className='metadataLabel'>PUBLISHER:</span> <a href='' className='metadataLink'>{props.product.publisher}</a><br />
-      <span className='metadataLabel'>RELEASE DATE:</span> {props.product.releaseDate}<br />
+      <span className='metadataLabel'>RELEASE DATE:</span> {props.product.releasedate}<br />
       <SidebarButton label='View update history' />
       <SidebarButton label='Read related news' />
       <SidebarButton label='View discussions' />
