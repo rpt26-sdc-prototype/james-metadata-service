@@ -1,3 +1,5 @@
+require('newrelic');
+
 const Path = require('path');
 let args = process.argv.slice(2);
 
