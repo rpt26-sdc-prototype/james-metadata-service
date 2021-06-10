@@ -8,6 +8,8 @@ const app = express();
 const port = 4032;
 const dbManager = require('./database/dbManager.js');
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 //Custom Classes
 const SteamProduct = require('./classes/steamProduct.js');
 
