@@ -2,6 +2,8 @@
 const express = require('express');
 const path = require('path');
 const Promise = require('bluebird');
+require('core-js/stable');
+require('regenerator-runtime/runtime');
 
 //Server Init
 const app = express();
