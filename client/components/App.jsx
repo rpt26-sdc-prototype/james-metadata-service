@@ -33,8 +33,7 @@ class App extends React.Component {
       var url = '/api/product/' + p.slice(1);
     }
 
-    const ipAddress = 'http://3.135.240.146';
-    axios.get(`${ipAddress}${url}`).then((response) => {
+    axios.get(url).then((response) => {
       this.setState({
         product: response.data
       })

@@ -7,7 +7,7 @@ require('regenerator-runtime/runtime');
 
 //Server Init
 const app = express();
-const port = 4032;
+const port = 3000;
 const dbManager = require('./database/dbManager.js');
 
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -35,7 +35,6 @@ app.use(bodyParser.json());
 //create
 app.post('/api/product/', (req, res, next) => {
   product = req.body;
-
   dbManager.insertGame(product).then((product) => {
     res.status(201).send('game created');
   }).catch((error) => {
@@ -47,6 +46,7 @@ app.post('/api/product/', (req, res, next) => {
 app.get('/api/product/*', (req, res, next) => {
   productID = req.originalUrl.slice('/api/product/'.length);
   dbManager.getGame(productID).then((product) => {
+
     res.status(200).send(product);
   }).catch((error) => {
     res.status(404).send(error);
