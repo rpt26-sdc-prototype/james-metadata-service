@@ -10,7 +10,7 @@ const app = express();
 const port = 3000;
 const dbManager = require('./database/dbManager.js');
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
