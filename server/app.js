@@ -42,15 +42,28 @@ app.post('/api/product/', (req, res, next) => {
   })
 });
 
+var fakeRedis = {};
+
 //read
 app.get('/api/product/*', (req, res, next) => {
   productID = req.originalUrl.slice('/api/product/'.length);
-  dbManager.getGame(productID).then((product) => {
 
+  if (fakeRedis[productID]) {
+    res.status(200).send(fakeRedis[productID]);
+    return;
+  }
+
+  dbManager.getGame(productID).then((product) => {
+    fakeRedis[productID] = product;
     res.status(200).send(product);
   }).catch((error) => {
     res.status(404).send(error);
   })
+});
+
+app.get('/api/clearfakeredis', (req, res) => {
+  fakeRedis = {};
+  res.status(200).send('fake redis is now clean');
 });
 
 //update
