@@ -84,9 +84,6 @@ app.get('/api/product/*', (req, res) => {
         })
       }
     })
-    .catch((error) => {
-      res.sendStatus(404).send(error);
-    })
   }
   catch (error) {
     console.error(error);
