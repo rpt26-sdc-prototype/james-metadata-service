@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const Promise = require('bluebird');
+const redis = require('redis')
 require('core-js/stable');
 require('regenerator-runtime/runtime');
 
@@ -29,6 +30,15 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const client = redis.createClient(6379);
+
+client.on('ready', () => {
+  console.log('client connected to Redis server');
+});
+
+client.on('error', (error) => {
+  console.error(error);
+});
 
 //api endpoints
 
@@ -45,26 +55,48 @@ app.post('/api/product/', (req, res, next) => {
 var fakeRedis = {};
 
 //read
-app.get('/api/product/*', (req, res, next) => {
+// app.get('/api/product/*', (req, res, next) => {
+//   productID = req.originalUrl.slice('/api/product/'.length);
+//   if (fakeRedis[productID]) {
+//     res.status(200).send(fakeRedis[productID]);
+//     return;
+//   }
+//   dbManager.getGame(productID).then((product) => {
+//     fakeRedis[productID] = product;
+//     res.status(200).send(product);
+//   }).catch((error) => {
+//     res.status(404).send(error);
+//   })
+// });
+app.get('/api/product/*', (req, res) => {
   productID = req.originalUrl.slice('/api/product/'.length);
-
-  if (fakeRedis[productID]) {
-    res.status(200).send(fakeRedis[productID]);
-    return;
+  try {
+    client.get(productID, async (err, product) => {
+      if (product) {
+        return res.status(200).send(product);
+      } else {
+        await dbManager.getGame(productID)
+        .then((product) => {
+          redis.set(productID, product);
+          res.status(200).send(product);
+        }).catch((error) => {
+          res.status(404).send(error);
+        })
+      }
+    })
+    .catch((error) => {
+      res.sendStatus(404).send(error);
+    })
   }
-
-  dbManager.getGame(productID).then((product) => {
-    fakeRedis[productID] = product;
-    res.status(200).send(product);
-  }).catch((error) => {
-    res.status(404).send(error);
-  })
+  catch (error) {
+    console.error.(error);
+  }
 });
 
-app.get('/api/clearfakeredis', (req, res) => {
-  fakeRedis = {};
-  res.status(200).send('fake redis is now clean');
-});
+// app.get('/api/clearfakeredis', (req, res) => {
+//   fakeRedis = {};
+//   res.status(200).send('fake redis is now clean');
+// });
 
 //update
 app.put('/api/product/*', (req, res, next) => {
