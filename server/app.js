@@ -89,7 +89,7 @@ app.get('/api/product/*', (req, res) => {
     })
   }
   catch (error) {
-    console.error.(error);
+    console.error(error);
   }
 });
 
